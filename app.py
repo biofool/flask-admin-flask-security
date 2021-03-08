@@ -1,3 +1,6 @@
+import secrets
+
+#
 from flask import Flask, redirect, render_template, url_for
 from flask_admin import Admin
 from flask_admin import helpers as admin_helpers
@@ -9,7 +12,7 @@ from flask_sqlalchemy import SQLAlchemy
 secureApp = Flask(__name__)
 # Configure a specific Bootswatch theme
 secureApp.config['FLASK_ADMIN_SWATCH'] = 'sandstone'
-secureApp.config['SECRET_KEY'] = 'secretkey'
+secureApp.config['SECRET_KEY'] = secrets.token_urlsafe()
 secureApp.config['SECURITY_PASSWORD_SALT'] = 'none'
 # Configure application to route to the Flask-Admin index view upon login
 secureApp.config['SECURITY_POST_LOGIN_VIEW'] = '/admin/'
@@ -61,6 +64,12 @@ def create_user():
 
 # Instantiate Flask-Admin
 admin = Admin(secureApp, name='Admin', base_template='my_master.html', template_mode='bootstrap3')
+
+def isbad(word):
+    pass
+    #/usr/share/dict/american-english
+    #/usr/share/dict/british-english
+
 
 # Create a ModelView to add to our administrative interface
 class UserModelView(ModelView):
